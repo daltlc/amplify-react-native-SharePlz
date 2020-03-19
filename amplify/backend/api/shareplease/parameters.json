@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "shareplease",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authsharepleasebacaa5d8",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
