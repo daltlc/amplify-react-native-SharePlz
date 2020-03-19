@@ -8,6 +8,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <AddTodoButton/>
+      {/* <LogoutButton/> */}
       {/* <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
           <Image

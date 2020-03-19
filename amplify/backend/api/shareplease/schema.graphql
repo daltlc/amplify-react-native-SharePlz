@@ -3,3 +3,11 @@ type Todo @model {
   name: String!
   description: String
 }
+
+type Memeber @model @auth(rules: [
+  {allow: owner},
+]){
+  id: String!
+  email: String!
+  
+}

@@ -26,3 +26,28 @@ export const listTodos = /* GraphQL */ `
     }
   }
 `;
+export const getMemeber = /* GraphQL */ `
+  query GetMemeber($id: ID!) {
+    getMemeber(id: $id) {
+      id
+      email
+      owner
+    }
+  }
+`;
+export const listMemebers = /* GraphQL */ `
+  query ListMemebers(
+    $filter: ModelMemeberFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMemebers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        email
+        owner
+      }
+      nextToken
+    }
+  }
+`;

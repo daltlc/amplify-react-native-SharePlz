@@ -37,3 +37,39 @@ export const deleteTodo = /* GraphQL */ `
     }
   }
 `;
+export const createMemeber = /* GraphQL */ `
+  mutation CreateMemeber(
+    $input: CreateMemeberInput!
+    $condition: ModelMemeberConditionInput
+  ) {
+    createMemeber(input: $input, condition: $condition) {
+      id
+      email
+      owner
+    }
+  }
+`;
+export const updateMemeber = /* GraphQL */ `
+  mutation UpdateMemeber(
+    $input: UpdateMemeberInput!
+    $condition: ModelMemeberConditionInput
+  ) {
+    updateMemeber(input: $input, condition: $condition) {
+      id
+      email
+      owner
+    }
+  }
+`;
+export const deleteMemeber = /* GraphQL */ `
+  mutation DeleteMemeber(
+    $input: DeleteMemeberInput!
+    $condition: ModelMemeberConditionInput
+  ) {
+    deleteMemeber(input: $input, condition: $condition) {
+      id
+      email
+      owner
+    }
+  }
+`;

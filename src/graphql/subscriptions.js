@@ -28,3 +28,30 @@ export const onDeleteTodo = /* GraphQL */ `
     }
   }
 `;
+export const onCreateMemeber = /* GraphQL */ `
+  subscription OnCreateMemeber($owner: String!) {
+    onCreateMemeber(owner: $owner) {
+      id
+      email
+      owner
+    }
+  }
+`;
+export const onUpdateMemeber = /* GraphQL */ `
+  subscription OnUpdateMemeber($owner: String!) {
+    onUpdateMemeber(owner: $owner) {
+      id
+      email
+      owner
+    }
+  }
+`;
+export const onDeleteMemeber = /* GraphQL */ `
+  subscription OnDeleteMemeber($owner: String!) {
+    onDeleteMemeber(owner: $owner) {
+      id
+      email
+      owner
+    }
+  }
+`;
