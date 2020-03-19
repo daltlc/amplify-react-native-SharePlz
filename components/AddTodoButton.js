@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
 	input: {
 		height: 50,
 		borderBottomWidth: 2,
-		borderBottomColor: 'blue',
+		borderBottomColor: 'orange',
 		marginVertical: 10
 	},
 	buttonContainer: {

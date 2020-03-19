@@ -11,7 +11,7 @@ import config from "./aws-exports"
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 import { withAuthenticator } from 'aws-amplify-react-native';
-// import AuthComp from './AuthComp';
+import './App.scss';
 
 const Stack = createStackNavigator();
 
@@ -52,7 +52,6 @@ function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        {/* <AuthComp/> */}
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
           <Stack.Navigator>
@@ -65,9 +64,36 @@ function App(props) {
   }
 }
 
+const signUpConfig = {
+  header: 'Sign Up',
+  hideAllDefaults: true,
+  hideSignUp: true,
+  signUpFields: [
+    {
+      label: 'Email',
+      key: 'username',
+      required: true,
+      displayOrder: 1,
+      type: 'email'
+    },
+    {
+      label: 'Password',
+      key: 'password',
+      required: true,
+      displayOrder: 2,
+      type: 'password'
+    }
+  ]
+};
+
 export default withAuthenticator(App, {
   // Render a sign out button once logged in
   includeGreetings: true, 
+  signUpConfig,
+  theme: {
+    button: { backgroundColor: '#309ab1', fontWeight: 'bold', borderRadius: '4px', margin: '0 auto' },
+    a: { color: '#309ab1'}
+  }
 });
 
 
@@ -75,5 +101,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
+  }
 });
