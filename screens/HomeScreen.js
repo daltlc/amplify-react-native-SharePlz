@@ -4,10 +4,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import AddTodoButton from '../components/AddTodoButton';
 import { MonoText } from '../components/StyledText';
+import OverlayComp from '../components/OverlayComp';
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <AddTodoButton/>
+      <OverlayComp/>
       {/* <LogoutButton/> */}
       {/* <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
