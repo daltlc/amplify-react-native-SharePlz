@@ -11,7 +11,7 @@ import config from "./aws-exports"
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 import { withAuthenticator } from 'aws-amplify-react-native';
-import './App.scss';
+// import './styles/App.scss';
 
 const Stack = createStackNavigator();
 
@@ -71,7 +71,7 @@ const signUpConfig = {
   signUpFields: [
     {
       label: 'Email',
-      key: 'username',
+      key: 'email',
       required: true,
       displayOrder: 1,
       type: 'email'
@@ -92,7 +92,7 @@ export default withAuthenticator(App, {
   signUpConfig,
   theme: {
     button: { backgroundColor: '#309ab1', fontWeight: 'bold', borderRadius: '4px', margin: '0 auto' },
-    a: { color: '#309ab1'}
+    a: { color: '#309ab1'},
   }
 });
 
