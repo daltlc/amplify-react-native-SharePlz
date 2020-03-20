@@ -91,8 +91,8 @@ export default withAuthenticator(App, {
   includeGreetings: true, 
   signUpConfig,
   theme: {
-    button: { backgroundColor: '#309ab1', fontWeight: 'bold', borderRadius: '4px', margin: '0 auto' },
-    a: { color: '#309ab1'},
+    button: { backgroundColor: 'red', fontWeight: 'bold', borderRadius: '4px', margin: '0 auto' },
+    a: { color: 'red'},
   }
 });
 

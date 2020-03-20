@@ -9,7 +9,7 @@ export default class App extends React.Component {
 		phoneNumber: '',
 		name: '',
 		todos: [],
-		isVisible: true,
+		isVisible: true
 	};
 
 	async componentDidMount() {
@@ -41,9 +41,7 @@ export default class App extends React.Component {
 
 		const newTodo = result.data.createTodo;
 		const updatedTodo = [ newTodo, ...todos ];
-		this.setState({ todos: updatedTodo, name: '', zip: '', phoneNumber: '' });
-
-		this.setState({ isVisible: false })
+		this.setState({ todos: updatedTodo, name: '', zip: '', phoneNumber: '', isVisible: false });
 	};
 
 	render() {
@@ -58,31 +56,38 @@ export default class App extends React.Component {
 						</View>
 					))}
 				</ScrollView>
-
-				<TextInput
-					isVisible={this.state.isVisible}
-					style={styles.input}
-					value={this.state.name}
-					onChangeText={(val) => this.onChangeText('name', val)}
-					placeholder="Items needed, seperated by commas. Ex: bread, eggs, water)"
-				/>
-				<TextInput
-					isVisible={this.state.isVisible}
-					style={styles.input}
-					value={this.state.zip}
-					onChangeText={(val) => this.onChangeText('zip', val)}
-					placeholder="Enter ZIP Code"
-				/>
-				<TextInput
-					isVisible={this.state.isVisible}
-					style={styles.input}
-					value={this.state.phoneNumber}
-					onChangeText={(val) => this.onChangeText('phoneNumber', val)}
-					placeholder="Enter best phone to text you at"
-				/>
-				<TouchableOpacity isVisible={this.state.isVisible} onPress={this.addInfo} style={styles.buttonContainer}>
-					<Text style={styles.buttonText}>Add Info</Text>
-				</TouchableOpacity>
+				{this.state.isVisible && (
+					<View>
+						<TextInput
+							isVisible={this.state.isVisible}
+							style={styles.input}
+							value={this.state.name}
+							onChangeText={(val) => this.onChangeText('name', val)}
+							placeholder="Items needed, seperated by commas. Ex: bread, eggs, water)"
+						/>
+						<TextInput
+							isVisible={this.state.isVisible}
+							style={styles.input}
+							value={this.state.zip}
+							onChangeText={(val) => this.onChangeText('zip', val)}
+							placeholder="Enter ZIP Code"
+						/>
+						<TextInput
+							isVisible={this.state.isVisible}
+							style={styles.input}
+							value={this.state.phoneNumber}
+							onChangeText={(val) => this.onChangeText('phoneNumber', val)}
+							placeholder="Enter best phone to text you at"
+						/>
+						<TouchableOpacity
+							isVisible={this.state.isVisible}
+							onPress={this.addInfo}
+							style={styles.buttonContainer}
+						>
+							<Text style={styles.buttonText}>Add Info</Text>
+						</TouchableOpacity>
+					</View>
+				)}
 			</View>
 		);
 	}

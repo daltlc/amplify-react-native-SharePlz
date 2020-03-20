@@ -9,14 +9,14 @@ export default class OverlayComp extends React.Component {
 		return (
 			<Overlay style={styles.overlay} isVisible={this.state.isVisible} onBackdropPress={() => this.setState({ isVisible: false })}>
 				<Text style={styles.overlayTitle}>
-					Hello and welcome to SharePlz!
+					Hello and welcome to SharePlz
 					{"\n"}
 				</Text>
 				<Text style={styles.overlayInstructions}>
-					This applications is ment for emergency use for sharing inventory through different households, if supplies runs short. 
+					This applications is ment for emergency use to share things in neighborhoods if supplies became dangerously low. 
 				</Text>
 				<Text style={styles.overlayInstructions}>
-					You will list what you need, your ZIP code and phone number. This will let people see individuals close to their own ZIP code, hopefully ending with assistance. 
+					You will list what you need, your ZIP code and phone number. This will let people see individuals close to their own ZIP code.
 					{"\n"}
 					{"\n"}
 					You will be limited to one post per day.

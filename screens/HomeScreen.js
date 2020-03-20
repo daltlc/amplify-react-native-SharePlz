@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import AddTodoButton from '../components/AddTodoButton';
@@ -7,7 +7,10 @@ import { MonoText } from '../components/StyledText';
 import OverlayComp from '../components/OverlayComp';
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+    >
       <AddTodoButton/>
       <OverlayComp/>
       {/* <LogoutButton/> */}
@@ -51,7 +54,7 @@ export default function HomeScreen() {
           <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
         </View>
       </View> */}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
