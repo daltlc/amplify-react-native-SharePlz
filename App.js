@@ -88,11 +88,11 @@ const signUpConfig = {
 
 export default withAuthenticator(App, {
   // Render a sign out button once logged in
-  includeGreetings: true, 
+  // includeGreetings: true, 
   signUpConfig,
   theme: {
-    button: { backgroundColor: '#309ab1', fontWeight: 'bold', borderRadius: '4px', margin: '0 auto' },
-    a: { color: '#309ab1'},
+    button: { backgroundColor: 'red', fontWeight: 'bold', borderRadius: '4px', margin: '0 auto' },
+    a: { color: 'red'},
   }
 });
 
