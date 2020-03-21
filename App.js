@@ -11,6 +11,9 @@ import config from "./aws-exports"
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 import { withAuthenticator } from 'aws-amplify-react-native';
+import {CustomAuthTheme} from './components/CustomAuthTheme'
+
+
 // import './styles/App.scss';
 
 const Stack = createStackNavigator();
@@ -88,12 +91,8 @@ const signUpConfig = {
 
 export default withAuthenticator(App, {
   // Render a sign out button once logged in
-  // includeGreetings: true, 
+  includeGreetings: true, 
   signUpConfig,
-  theme: {
-    button: { backgroundColor: 'red', fontWeight: 'bold', borderRadius: '4px', margin: '0 auto' },
-    a: { color: 'red'},
-  }
 });
 
 

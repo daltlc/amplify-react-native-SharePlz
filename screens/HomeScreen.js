@@ -9,29 +9,21 @@ import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { getMember } from '../src/graphql/queries';
 import { createMember } from '../src/graphql/mutations';
 export default class HomeScreen extends React.Component {
-  async componentDidMount() {
+	async componentDidMount() {
 		try {
 			// get cognito user values from current auth session
-			const {
-			  idToken: {
-				payload: {
-				  email,
-				  sub: id
-				}
-			  }
-			} = await Auth.currentSession();
-	  
+			const { idToken: { payload: { email, sub: id } } } = await Auth.currentSession();
+
 			console.log({ id, email });
-	  
+
 			// const {
 			//   data: {
 			// 	getMember: existingMember
 			//   }
 			// } = await API.graphql(graphqlOperation(getMember, { id }));
-	  
+
 			// console.log({existingMember});
-	  
-	  
+
 			// if (existingMember) {
 			//   // save existingMember as user to redux app state
 			//   this.props.setUserProfile(existingMember);
@@ -43,26 +35,28 @@ export default class HomeScreen extends React.Component {
 			// 	  createMember: newMember
 			// 	}
 			//   } = await API.graphql(graphqlOperation(createMember, { input }));
-	  
+
 			//   console.log({newMember});
 			//   // save newMember as user to redux app state
 			//   this.props.setUserProfile(newMember);
-			  
-			// }
-		  }
-		  catch(e) {
-			console.log(e);
-		  }
-		
 
-  }
-  
+			// }
+		} catch (e) {
+			console.log(e);
+		}
+	}
+	signOut = async () => {
+		await Auth.signOut();
+	};
 
 	render() {
 		return (
 			<KeyboardAvoidingView style={styles.container} behavior="padding">
 				<AddTodoButton />
 				<OverlayComp />
+				{/* <TouchableOpacity onPress={this.signOut} style={styles.buttonContainer}>
+					<Text style={styles.buttonText}>Back</Text>
+				</TouchableOpacity> */}
 				{/* <LogoutButton/> */}
 				{/* <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
@@ -232,5 +226,17 @@ const styles = StyleSheet.create({
 	helpLinkText: {
 		fontSize: 14,
 		color: '#2e78b7'
-	}
+	},
+	buttonContainer: {
+		backgroundColor: '#34495e',
+		marginTop: 10,
+		marginBottom: 20,
+		padding: 10,
+		borderRadius: 5,
+		alignItems: 'center'
+	},
+	buttonText: {
+		color: '#fff',
+		fontSize: 24
+	},
 });
