@@ -103,11 +103,11 @@ amplify add api
 
 ```graphql
 type Todo @model {
-	id: ID!
-	name: String!
+  id: ID!
+  name: String!
   zip: String
   phoneNumber: String
-	description: String
+  description: String
 }
 ```
 
