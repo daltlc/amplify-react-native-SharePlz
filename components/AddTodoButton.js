@@ -93,7 +93,7 @@ export default class App extends React.Component {
 							maxLength={12}
 						/>
 						<TouchableOpacity onPress={this.addInfo} style={styles.buttonContainer}>
-							<Text style={styles.buttonText}>Add Info</Text>
+							<Text style={styles.buttonText}>Add</Text>
 						</TouchableOpacity>
 						<TouchableOpacity
 							onPress={() => this.setState({ showInputs: false })}
@@ -104,20 +104,22 @@ export default class App extends React.Component {
 					</View>
 				)}
 				{this.state.showInputs === false && (
-					<View>
+					<View style={styles.filterAndAdd}>
 						<TextInput
 							style={styles.zipFilterInput}
 							value={this.state.ZIPfilter}
 							onChangeText={(val) => this.onChangeText('ZIPfilter', val)}
-							placeholder="Enter ZIP to filter"
+							placeholder="Enter ZIP to filter people near you"
 							maxLength={5}
 						/>
+						<Text style={styles.or}>Or</Text>
 						<TouchableOpacity
 							onPress={() => this.setState({ showInputs: true })}
-							style={styles.buttonContainer}
+							style={styles.addbuttonContainer}
 						>
 							<Text style={styles.buttonText}>Add + </Text>
 						</TouchableOpacity>
+
 					</View>
 				)}
 
@@ -147,10 +149,20 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 		fontSize: 16
 	},
+	filterAndAdd:{
+		marginBottom:20
+	},
 	buttonContainer: {
 		backgroundColor: '#34495e',
 		marginTop: 10,
 		marginBottom: 20,
+		padding: 10,
+		borderRadius: 5,
+		alignItems: 'center'
+	},
+	addbuttonContainer: {
+		backgroundColor: '#34495e',
+		marginTop: 10,
 		padding: 10,
 		borderRadius: 5,
 		alignItems: 'center'
@@ -181,7 +193,11 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		paddingHorizontal: 10
 	},
-
+	or:{
+		fontSize:20,
+		marginVertical: 20,
+		textAlign: 'center'
+	},
 	scrollView: {
 		backgroundColor: 'white',
 		marginHorizontal: -10

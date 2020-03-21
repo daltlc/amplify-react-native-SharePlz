@@ -54,9 +54,9 @@ export default class HomeScreen extends React.Component {
 			<KeyboardAvoidingView style={styles.container} behavior="padding">
 				<AddTodoButton />
 				<OverlayComp />
-				<TouchableOpacity onPress={this.signOut} style={styles.buttonContainer}>
+				{/* <TouchableOpacity onPress={this.signOut} style={styles.buttonContainer}>
 					<Text style={styles.buttonText}>Back</Text>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 				{/* <LogoutButton/> */}
 				{/* <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
