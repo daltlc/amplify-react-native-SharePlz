@@ -52,21 +52,21 @@ export default class App extends React.Component {
 		return (
 			<View style={styles.container}>
 				{this.state.showInputs === false && (
-				<ScrollView style={styles.scrollView}>
-					{this.state.todos.map((todo, index) => (
-						<View key={index} style={styles.todo}>
-							<Text style={styles.nameTitle}>
-								Items: <Text style={styles.name}>{todo.name}</Text>
-							</Text>
-							<Text style={styles.nameTitle}>
-								ZIP: <Text style={styles.name}>{todo.zip}</Text>
-							</Text>
-							<Text style={styles.nameTitle}>
-								Phone: <Text style={styles.name}>{todo.phoneNumber}</Text>
-							</Text>
-						</View>
-					))}
-				</ScrollView>
+					<ScrollView style={styles.scrollView}>
+						{this.state.todos.map((todo, index) => (
+							<View key={index} style={styles.todo}>
+								<Text style={styles.nameTitle}>
+									Items: <Text style={styles.name}>{todo.name}</Text>
+								</Text>
+								<Text style={styles.nameTitle}>
+									ZIP: <Text style={styles.name}>{todo.zip}</Text>
+								</Text>
+								<Text style={styles.nameTitle}>
+									Phone: <Text style={styles.name}>{todo.phoneNumber}</Text>
+								</Text>
+							</View>
+						))}
+					</ScrollView>
 				)}
 				{this.state.showInputs && (
 					<View>
@@ -94,7 +94,10 @@ export default class App extends React.Component {
 						<TouchableOpacity onPress={this.addInfo} style={styles.buttonContainer}>
 							<Text style={styles.buttonText}>Add Info</Text>
 						</TouchableOpacity>
-						<TouchableOpacity onPress={() => this.setState({ showInputs: false })} style={styles.buttonContainer}>
+						<TouchableOpacity
+							onPress={() => this.setState({ showInputs: false })}
+							style={styles.buttonContainer}
+						>
 							<Text style={styles.buttonText}>Back</Text>
 						</TouchableOpacity>
 					</View>
@@ -118,18 +121,18 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#fff',
 		paddingHorizontal: 10,
-		paddingTop: 50
+		paddingTop: 20
 	},
 	input: {
 		height: 50,
 		borderBottomWidth: 2,
-		borderBottomColor: 'orange',
+		borderBottomColor: 'lightblue',
 		marginVertical: 10
 	},
 	buttonContainer: {
 		backgroundColor: '#34495e',
 		marginTop: 10,
-		marginBottom: 10,
+		marginBottom: 20,
 		padding: 10,
 		borderRadius: 5,
 		alignItems: 'center'
@@ -141,13 +144,25 @@ const styles = StyleSheet.create({
 
 	todo: {
 		borderBottomWidth: 1,
+		borderRadius: 10,
+		marginBottom: 10,
+		marginHorizontal: 10,
 		borderBottomColor: '#ddd',
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		backgroundColor: 'lightyellow'
+		backgroundColor: 'lightblue'
 	},
-	name: { fontSize: 16, fontWeight: 'normal' },
-	nameTitle: { fontWeight: 'bold' },
+	name: {
+		fontSize: 16,
+		fontWeight: 'normal',
+		paddingHorizontal: 10,
+		textTransform: "lowercase"
+	},
+
+	nameTitle: {
+		fontWeight: 'bold',
+		paddingHorizontal: 10
+	},
 
 	scrollView: {
 		backgroundColor: 'white',
