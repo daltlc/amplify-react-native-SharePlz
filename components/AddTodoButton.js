@@ -46,7 +46,7 @@ export default class App extends React.Component {
 
 		const newTodo = result.data.createTodo;
 		const updatedTodo = [ newTodo, ...todos ];
-		this.setState({ todos: updatedTodo, name: '', zip: '', phoneNumber: '', isVisible: false });
+		this.setState({ todos: updatedTodo, name: '', zip: '', phoneNumber: '', showInputs: false });
 	};
 
 	render() {
