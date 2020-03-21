@@ -13,7 +13,8 @@ export default class App extends React.Component {
 		name: '',
 		todos: [],
 		isVisible: false,
-		showInputs: false
+		showInputs: false,
+		ZIPfilter: ''
 	};
 
 	async componentDidMount() {
@@ -53,7 +54,7 @@ export default class App extends React.Component {
 			<View style={styles.container}>
 				{this.state.showInputs === false && (
 					<ScrollView style={styles.scrollView}>
-						{this.state.todos.map((todo, index) => (
+						{this.state.todos.filter((todo) => todo.zip == this.state.ZIPfilter).map((todo, index) => (
 							<View key={index} style={styles.todo}>
 								<Text style={styles.nameTitle}>
 									Items: <Text style={styles.name}>{todo.name}</Text>
@@ -103,13 +104,23 @@ export default class App extends React.Component {
 					</View>
 				)}
 				{this.state.showInputs === false && (
-					<TouchableOpacity
-						onPress={() => this.setState({ showInputs: true })}
-						style={styles.buttonContainer}
-					>
-						<Text style={styles.buttonText}>Add + </Text>
-					</TouchableOpacity>
+					<View>
+						<TextInput
+							style={styles.input}
+							value={this.state.ZIPfilter}
+							onChangeText={(val) => this.onChangeText('ZIPfilter', val)}
+							placeholder="Enter ZIP to filter"
+							maxLength={5}
+						/>
+						<TouchableOpacity
+							onPress={() => this.setState({ showInputs: true })}
+							style={styles.buttonContainer}
+						>
+							<Text style={styles.buttonText}>Add + </Text>
+						</TouchableOpacity>
+					</View>
 				)}
+
 				{/* <FontAwesomeIcon icon={faCoffee} /> */}
 			</View>
 		);
@@ -156,7 +167,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'normal',
 		paddingHorizontal: 10,
-		textTransform: "lowercase"
+		textTransform: 'lowercase'
 	},
 
 	nameTitle: {

@@ -9,7 +9,7 @@ export default class OverlayComp extends React.Component {
 		return (
 			<Overlay style={styles.overlay} isVisible={this.state.isVisible} onBackdropPress={() => this.setState({ isVisible: false })}>
 				<Text style={styles.overlayTitle}>
-					Hello and welcome to SharePlz
+					Welcome to SharePlz
 					{"\n"}
 				</Text>
 				<Text style={styles.overlayInstructions}>
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
 	overlayTitle: {
 		fontSize: 20,
 		textAlign: 'center',
-		padding:4
+		paddingTop:20,
+		fontWeight: 'bold'
 	},
 	overlayInstructions: {
 		fontSize: 16,
