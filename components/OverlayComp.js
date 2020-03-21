@@ -1,27 +1,35 @@
 import React from 'react';
 import { Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
-import { Overlay } from 'react-native-elements'
+import { Overlay } from 'react-native-elements';
 export default class OverlayComp extends React.Component {
 	state = {
 		isVisible: true
 	};
 	render() {
 		return (
-			<Overlay style={styles.overlay} isVisible={this.state.isVisible} onBackdropPress={() => this.setState({ isVisible: false })}>
+			<Overlay
+				width="auto"
+				height="auto"
+				style={styles.overlay}
+				isVisible={this.state.isVisible}
+				onBackdropPress={() => this.setState({ isVisible: false })}
+			>
 				<Text style={styles.overlayTitle}>
 					Welcome to SharePlz
-					{"\n"}
+					{'\n'}
 				</Text>
 				<Text style={styles.overlayInstructions}>
-					This applications is ment for emergency use to share things in neighborhoods if supplies became dangerously low. 
+					This application is meant for emergency use only, in order to share things throughout neighborhoods
+					if supplies became dangerously low.
 				</Text>
 				<Text style={styles.overlayInstructions}>
-					You will list what you need, your ZIP code and phone number. This will let people see individuals close to their own ZIP code.
-					{"\n"}
-					{"\n"}
+					When adding a new entry, list the items you need, your ZIP code and the best phone number, or whatsApp
+					ID to reach you at.
+					{'\n'}
+					{'\n'}
 					You will be limited to one post per day.
-					{"\n"}
-					{"\n"}
+					{'\n'}
+					{'\n'}
 					Thanks for the support, stay safe everyone!
 				</Text>
 				<TouchableOpacity onPress={() => this.setState({ isVisible: false })} style={styles.buttonContainer}>
@@ -34,13 +42,13 @@ export default class OverlayComp extends React.Component {
 
 const styles = StyleSheet.create({
 	overlay: {
-	  flex: 1,
-	  backgroundColor: '#fff',
+		flex: 1,
+		backgroundColor: '#fff'
 	},
 	overlayTitle: {
 		fontSize: 20,
 		textAlign: 'center',
-		paddingTop:20,
+		paddingTop: 20,
 		fontWeight: 'bold'
 	},
 	overlayInstructions: {
@@ -54,10 +62,10 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		padding: 10,
 		borderRadius: 5,
-		alignItems: 'center',
+		alignItems: 'center'
 	},
 	buttonText: {
 		color: '#fff',
 		fontSize: 24
-	},
-  });
+	}
+});
