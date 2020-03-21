@@ -15,7 +15,7 @@ npm install -g @aws-amplify/cli
 2. Clone Chatt
 
 ```sh
-git clone https://github.com/aws-samples/aws-appsync-chat.git
+git clone https://github.com/daltlc/amplify-react-native-SharePlz.git
 ```
 
 3. Install dependencies
