@@ -3,19 +3,23 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from 
 import { listTodos } from '../src/graphql/queries';
 import { createTodo } from '../src/graphql/mutations';
 import { API, graphqlOperation } from 'aws-amplify';
+// import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+// import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
 export default class App extends React.Component {
 	state = {
 		zip: '',
 		phoneNumber: '',
 		name: '',
 		todos: [],
-		isVisible: true
+		isVisible: false,
+		showInputs: false
 	};
 
 	async componentDidMount() {
 		try {
 			const todos = await API.graphql(graphqlOperation(listTodos));
-			console.log('todos: ', todos);
+			// console.log('todos: ', todos);
 			this.setState({ todos: todos.data.listTodos.items });
 		} catch (err) {
 			console.log('error: ', err);
@@ -47,47 +51,63 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
+				{this.state.showInputs === false && (
 				<ScrollView style={styles.scrollView}>
 					{this.state.todos.map((todo, index) => (
 						<View key={index} style={styles.todo}>
-							<Text style={styles.name}>Items: {todo.name}</Text>
-							<Text style={styles.name}>ZIP: {todo.zip}</Text>
-							<Text style={styles.name}>Phone: {todo.phoneNumber}</Text>
+							<Text style={styles.nameTitle}>
+								Items: <Text style={styles.name}>{todo.name}</Text>
+							</Text>
+							<Text style={styles.nameTitle}>
+								ZIP: <Text style={styles.name}>{todo.zip}</Text>
+							</Text>
+							<Text style={styles.nameTitle}>
+								Phone: <Text style={styles.name}>{todo.phoneNumber}</Text>
+							</Text>
 						</View>
 					))}
 				</ScrollView>
-				{this.state.isVisible && (
+				)}
+				{this.state.showInputs && (
 					<View>
 						<TextInput
-							isVisible={this.state.isVisible}
 							style={styles.input}
 							value={this.state.name}
 							onChangeText={(val) => this.onChangeText('name', val)}
 							placeholder="Items needed, seperated by commas. Ex: bread, eggs, water)"
+							maxLength={100}
 						/>
 						<TextInput
-							isVisible={this.state.isVisible}
 							style={styles.input}
 							value={this.state.zip}
 							onChangeText={(val) => this.onChangeText('zip', val)}
 							placeholder="Enter ZIP Code"
+							maxLength={5}
 						/>
 						<TextInput
-							isVisible={this.state.isVisible}
 							style={styles.input}
 							value={this.state.phoneNumber}
 							onChangeText={(val) => this.onChangeText('phoneNumber', val)}
-							placeholder="Enter best phone to text you at"
+							placeholder="Phone number"
+							maxLength={12}
 						/>
-						<TouchableOpacity
-							isVisible={this.state.isVisible}
-							onPress={this.addInfo}
-							style={styles.buttonContainer}
-						>
+						<TouchableOpacity onPress={this.addInfo} style={styles.buttonContainer}>
 							<Text style={styles.buttonText}>Add Info</Text>
+						</TouchableOpacity>
+						<TouchableOpacity onPress={() => this.setState({ showInputs: false })} style={styles.buttonContainer}>
+							<Text style={styles.buttonText}>Back</Text>
 						</TouchableOpacity>
 					</View>
 				)}
+				{this.state.showInputs === false && (
+					<TouchableOpacity
+						onPress={() => this.setState({ showInputs: true })}
+						style={styles.buttonContainer}
+					>
+						<Text style={styles.buttonText}>Add + </Text>
+					</TouchableOpacity>
+				)}
+				{/* <FontAwesomeIcon icon={faCoffee} /> */}
 			</View>
 		);
 	}
@@ -122,12 +142,15 @@ const styles = StyleSheet.create({
 	todo: {
 		borderBottomWidth: 1,
 		borderBottomColor: '#ddd',
-		paddingVertical: 10
+		paddingVertical: 10,
+		paddingHorizontal: 10,
+		backgroundColor: 'lightyellow'
 	},
-	name: { fontSize: 16 },
+	name: { fontSize: 16, fontWeight: 'normal' },
+	nameTitle: { fontWeight: 'bold' },
 
 	scrollView: {
 		backgroundColor: 'white',
-		marginHorizontal: 20
+		marginHorizontal: -10
 	}
 });
