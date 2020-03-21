@@ -106,7 +106,7 @@ export default class App extends React.Component {
 				{this.state.showInputs === false && (
 					<View>
 						<TextInput
-							style={styles.input}
+							style={styles.zipFilterInput}
 							value={this.state.ZIPfilter}
 							onChangeText={(val) => this.onChangeText('ZIPfilter', val)}
 							placeholder="Enter ZIP to filter"
@@ -139,6 +139,13 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 2,
 		borderBottomColor: 'lightblue',
 		marginVertical: 10
+	},
+	zipFilterInput: {
+		height: 50,
+		borderBottomWidth: 2,
+		borderBottomColor: 'lightblue',
+		marginVertical: 10,
+		fontSize: 16
 	},
 	buttonContainer: {
 		backgroundColor: '#34495e',
