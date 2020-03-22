@@ -12,7 +12,7 @@ npm install -g @aws-amplify/cli
 
 > You must also have the CLI configured with a user from your AWS account (`amplify configure`). For a walkthrough of how to do this, check out [this](https://www.youtube.com/watch?v=fWbM5DLh25U) video.
 
-2. Clone Chatt
+2. Clone Repo
 
 ```sh
 git clone https://github.com/daltlc/amplify-react-native-SharePlz.git
@@ -64,10 +64,10 @@ npm install -g @aws-amplify
 amplify configure
 ```
 
-2. Clone Chatt
+2. Clone Repo
 
 ```sh
-git clone https://github.com/aws-samples/aws-appsync-chat.git
+git clone https://github.com/daltlc/amplify-react-native-SharePlz.git
 ```
 
 3. Install dependencies
