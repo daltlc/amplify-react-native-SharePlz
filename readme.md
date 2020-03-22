@@ -2,7 +2,7 @@
 
 This project contains an Amplify project (`/amplify`) already configured & ready to be deployed. Deploying this project will create the following resources in your account: an authentication configuration using Amazon Cognito, an AWS AppSync GraphQL API, & a DynamoDB table.
 
-![Landing](./screenshots/SharePlz-proto-landing.png?raw=true "Landing")
+![Landing](./screenshots/overlay.PNG?raw=true "Landing")
 
 1. Make sure you are on the newest version of the AWS Amplify CLI
 
