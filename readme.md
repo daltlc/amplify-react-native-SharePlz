@@ -123,6 +123,10 @@ amplify push
 
 9. Run the project
 
+YOU WILL NEED EXPO CLI DOWNLOADED BEFORE STARTING.
+
+
+
 ```sh
 npm start
 ```
