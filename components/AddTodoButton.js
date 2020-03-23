@@ -1,13 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, Linking, Platform } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	TextInput,
+	TouchableOpacity,
+	ScrollView,
+	Linking,
+	Platform,
+	ImageBackground
+} from 'react-native';
 import { listTodos } from '../src/graphql/queries';
 import { createTodo } from '../src/graphql/mutations';
 import { API, graphqlOperation } from 'aws-amplify';
+import backdrop from '../assets/images/PLZbackdrop.png';
 
 export default class App extends React.Component {
 	state = {
 		zip: '',
 		phoneNumber: '',
+		item: '',
 		name: '',
 		todos: [],
 		isVisible: false,
@@ -30,36 +42,35 @@ export default class App extends React.Component {
 	};
 
 	addInfo = async (event) => {
-		const { name, todos, zip, phoneNumber } = this.state;
+		const { item, todos, zip, phoneNumber, name } = this.state;
 
 		event.preventDefault();
 
 		const input = {
-			name,
+			item,
 			zip,
-			phoneNumber
+			phoneNumber,
+			name
 		};
 
 		const result = await API.graphql(graphqlOperation(createTodo, { input }));
 
 		const newTodo = result.data.createTodo;
 		const updatedTodo = [ newTodo, ...todos ];
-		this.setState({ todos: updatedTodo, name: '', zip: '', phoneNumber: '', showInputs: false });
+		this.setState({ todos: updatedTodo, item: '', zip: '', phoneNumber: '', showInputs: false, name: '' });
 	};
 
 	dialCall = (number) => {
- 
 		let phoneNumber = '';
-	 
+
 		if (Platform.OS === 'android') {
-		  phoneNumber = number;
+			phoneNumber = number;
+		} else {
+			phoneNumber = number;
 		}
-		else {
-		  phoneNumber = number;
-		}
-	 
+
 		Linking.openURL(phoneNumber);
-	  };
+	};
 
 	render() {
 		return (
@@ -69,12 +80,15 @@ export default class App extends React.Component {
 						{this.state.todos.map((todo, index) => (
 							<View key={index} style={styles.todo}>
 								<Text style={styles.nameTitle}>
-									Items: <Text style={styles.name}>{todo.name}</Text>
+									Name: <Text style={styles.name}>{todo.name}</Text>
+								</Text>
+								<Text style={styles.nameTitle}>
+									Items: <Text style={styles.name}>{todo.item}</Text>
 								</Text>
 								<Text style={styles.nameTitle}>
 									ZIP: <Text style={styles.name}>{todo.zip}</Text>
 								</Text>
-								<Text style={styles.nameTitle} onPress={this.dialCall(todo.phoneNumber)} >
+								<Text style={styles.nameTitle} onPress={this.dialCall(todo.phoneNumber)}>
 									Phone or WhatsApp: <Text style={styles.name}>{todo.phoneNumber}</Text>
 								</Text>
 							</View>
@@ -87,6 +101,13 @@ export default class App extends React.Component {
 							style={styles.input}
 							value={this.state.name}
 							onChangeText={(val) => this.onChangeText('name', val)}
+							placeholder="Name"
+							maxLength={100}
+						/>
+						<TextInput
+							style={styles.input}
+							value={this.state.item}
+							onChangeText={(val) => this.onChangeText('item', val)}
 							placeholder="Items needed, seperated by commas. Ex: bread, eggs, water)"
 							maxLength={100}
 						/>
@@ -107,7 +128,6 @@ export default class App extends React.Component {
 							maxLength={12}
 							// minLength={12}
 							keyboardType={'numeric'}
-
 						/>
 						<TouchableOpacity onPress={this.addInfo} style={styles.buttonContainer}>
 							<Text style={styles.buttonText}>Add</Text>
@@ -121,16 +141,16 @@ export default class App extends React.Component {
 					</View>
 				)}
 				{this.state.showInputs === false && (
-					<View style={styles.filterAndAdd}>
-						
-						<TouchableOpacity
-							onPress={() => this.setState({ showInputs: true })}
-							style={styles.addbuttonContainer}
-						>
-							<Text style={styles.buttonText}>Add + </Text>
-						</TouchableOpacity>
-
-					</View>
+					<ImageBackground source={backdrop} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
+						<View style={styles.filterAndAdd}>
+							<TouchableOpacity
+								onPress={() => this.setState({ showInputs: true })}
+								style={styles.addbuttonContainer}
+							>
+								<Text style={styles.buttonText}>Add + </Text>
+							</TouchableOpacity>
+						</View>
+					</ImageBackground>
 				)}
 			</View>
 		);
@@ -157,8 +177,8 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 		fontSize: 16
 	},
-	filterAndAdd:{
-		marginBottom:20
+	filterAndAdd: {
+		marginBottom: 20
 	},
 	buttonContainer: {
 		backgroundColor: '#6ec2d7',
@@ -178,7 +198,7 @@ const styles = StyleSheet.create({
 	buttonText: {
 		color: '#fff',
 		fontSize: 24,
-		fontFamily: 'Chalkboard SE',
+		fontFamily: 'Chalkboard SE'
 	},
 
 	todo: {
@@ -197,8 +217,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		textTransform: 'uppercase',
 		color: 'white',
-		fontFamily: 'Chalkboard SE',
-
+		fontFamily: 'Chalkboard SE'
 	},
 
 	nameTitle: {
@@ -206,12 +225,10 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		color: 'white',
 		fontSize: 16,
-		fontFamily: 'Chalkboard SE',
-
-
+		fontFamily: 'Chalkboard SE'
 	},
-	or:{
-		fontSize:20,
+	or: {
+		fontSize: 20,
 		marginVertical: 20,
 		textAlign: 'center'
 	},

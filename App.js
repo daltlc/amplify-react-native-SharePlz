@@ -65,9 +65,9 @@ function App(props) {
 								},
 								headerTintColor: '#fff',
 								headerTitleStyle: {
-                  fontWeight: 'bold',
-                  fontFamily: 'Chalkboard SE',
-                  fontSize: 24
+									fontWeight: 'bold',
+									fontFamily: 'Chalkboard SE',
+									fontSize: 24
 								}
 							}}
 							name="Root"
@@ -105,11 +105,11 @@ const signUpConfig = {
 export default withAuthenticator(App, {
 	// Render a sign out button once logged in
 	includeGreetings: true,
-  signUpConfig,
-  theme: {
-    button: { backgroundColor: '#6ec2d7', fontWeight: 'bold', borderRadius: '4px', margin: '0 auto' },
-    a: { color: '#6ec2d7'}
-  }
+	signUpConfig,
+	theme: {
+		button: { backgroundColor: '#6ec2d7', fontWeight: 'bold', borderRadius: '4px', margin: '0 auto' },
+		a: { color: '#6ec2d7' }
+	}
 });
 
 const styles = StyleSheet.create({

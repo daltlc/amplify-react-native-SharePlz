@@ -1,9 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	TextInput,
+	TouchableOpacity,
+	ScrollView,
+	KeyboardAvoidingView,
+	ImageBackground
+} from 'react-native';
 import { listTodos } from '../src/graphql/queries';
 import { createTodo } from '../src/graphql/mutations';
 import { API, graphqlOperation } from 'aws-amplify';
-
+import backdrop from '../assets/images/PLZbackdrop.png';
 
 export default class App extends React.Component {
 	state = {
@@ -13,7 +22,8 @@ export default class App extends React.Component {
 		todos: [],
 		isVisible: false,
 		showInputs: false,
-		ZIPfilter: ''
+		ZIPfilter: '',
+		location: null
 	};
 
 	async componentDidMount() {
@@ -21,58 +31,53 @@ export default class App extends React.Component {
 			const todos = await API.graphql(graphqlOperation(listTodos));
 			// console.log('todos: ', todos);
 			this.setState({ todos: todos.data.listTodos.items });
+
+			// this.findCoordinates();
 		} catch (err) {
 			console.log('error: ', err);
 		}
 	}
 
+	findCoordinates = () => {
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+				const location = JSON.stringify(position);
+
+				this.setState({ location });
+				console.log(location);
+			},
+			(error) => Alert.alert(error.message),
+			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+		);
+	};
+
 	onChangeText = (key, val) => {
 		this.setState({ [key]: val });
 	};
 
-	addInfo = async (event) => {
-		const { name, todos, zip, phoneNumber } = this.state;
+	// addInfo = async (event) => {
+	// 	const { name, todos, zip, phoneNumber } = this.state;
 
-		event.preventDefault();
+	// 	event.preventDefault();
 
-		const input = {
-			name,
-			zip,
-			phoneNumber
-		};
+	// 	const input = {
+	// 		name,
+	// 		zip,
+	// 		phoneNumber
+	// 	};
 
-		const result = await API.graphql(graphqlOperation(createTodo, { input }));
+	// 	const result = await API.graphql(graphqlOperation(createTodo, { input }));
 
-		const newTodo = result.data.createTodo;
-		const updatedTodo = [ newTodo, ...todos ];
-		this.setState({ todos: updatedTodo, name: '', zip: '', phoneNumber: '', showInputs: false });
-	};
+	// 	const newTodo = result.data.createTodo;
+	// 	const updatedTodo = [ newTodo, ...todos ];
+	// 	this.setState({ todos: updatedTodo, name: '', zip: '', phoneNumber: '', showInputs: false });
+	// };
 
 	render() {
 		return (
 			<View style={styles.container}>
 				{this.state.showInputs === false && (
-					<ScrollView style={styles.scrollView}>
-						{this.state.todos.filter((todo) => todo.zip == this.state.ZIPfilter).map((todo, index) => (
-							<View key={index} style={styles.todo}>
-								<Text style={styles.nameTitle}>
-									Items: <Text style={styles.name}>{todo.name}</Text>
-								</Text>
-								<Text style={styles.nameTitle}>
-									ZIP: <Text style={styles.name}>{todo.zip}</Text>
-								</Text>
-								<Text style={styles.nameTitle}>
-									Phone: <Text style={styles.name}>{todo.phoneNumber}</Text>
-								</Text>
-							</View>
-						))}
-					</ScrollView>
-				)}
-				{this.state.showInputs === false && (
-					<KeyboardAvoidingView
-                        style={styles.container}
-                        behavior="padding"
-                    >
+					<ImageBackground source={backdrop} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
 						<View style={styles.filterAndAdd}>
 							<TextInput
 								style={styles.zipFilterInput}
@@ -83,9 +88,28 @@ export default class App extends React.Component {
 								keyboardType={'numeric'}
 							/>
 						</View>
-					</KeyboardAvoidingView>
+					</ImageBackground>
 				)}
 
+				{this.state.showInputs === false && (
+					<ImageBackground source={backdrop} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
+						<ScrollView style={styles.scrollView}>
+							{this.state.todos.filter((todo) => todo.zip == this.state.ZIPfilter).map((todo, index) => (
+								<View key={index} style={styles.todo}>
+									<Text style={styles.nameTitle}>
+										Items: <Text style={styles.name}>{todo.name}</Text>
+									</Text>
+									<Text style={styles.nameTitle}>
+										ZIP: <Text style={styles.name}>{todo.zip}</Text>
+									</Text>
+									<Text style={styles.nameTitle}>
+										Phone: <Text style={styles.name}>{todo.phoneNumber}</Text>
+									</Text>
+								</View>
+							))}
+						</ScrollView>
+					</ImageBackground>
+				)}
 			</View>
 		);
 	}
@@ -105,13 +129,15 @@ const styles = StyleSheet.create({
 		marginVertical: 10
 	},
 	zipFilterInput: {
-		height: 50,
+		height: 'auto',
 		borderBottomWidth: 2,
 		borderBottomColor: '#31465F',
-		marginVertical: 10,
-        fontSize: 16,
-        fontFamily: 'Chalkboard SE',
-
+		marginVertical: 0,
+		paddingBottom: 10,
+		paddingVertical: 20,
+		// fontSize: 16
+		// fontFamily: 'Chalkboard SE',
+		backgroundColor: '#fff'
 	},
 	filterAndAdd: {
 		marginBottom: 20
@@ -150,16 +176,16 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'normal',
 		paddingHorizontal: 10,
-        textTransform: 'uppercase',
-        fontFamily: 'Chalkboard SE',
-        color: 'white'
+		textTransform: 'uppercase',
+		fontFamily: 'Chalkboard SE',
+		color: 'white'
 	},
 
 	nameTitle: {
 		fontWeight: 'bold',
-        paddingHorizontal: 10,
-        color: 'white',
-        fontFamily: 'Chalkboard SE',
+		paddingHorizontal: 10,
+		color: 'white',
+		fontFamily: 'Chalkboard SE'
 	},
 	or: {
 		fontSize: 20,
