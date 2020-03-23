@@ -23,8 +23,8 @@ export default class OverlayComp extends React.Component {
 					if supplies became dangerously low.
 				</Text>
 				<Text style={styles.overlayInstructions}>
-					When adding a new entry, list the items you need, your ZIP code and the best phone number, or whatsApp
-					ID to reach you at.
+					When adding a new entry, list the items you need, your ZIP code and the best phone number, or
+					whatsApp ID to reach you at.
 					{'\n'}
 					{'\n'}
 					You will be limited to one post per day.

@@ -7,6 +7,7 @@ export const createTodo = /* GraphQL */ `
     $condition: ModelTodoConditionInput
   ) {
     createTodo(input: $input, condition: $condition) {
+      item
       id
       name
       zip
@@ -21,6 +22,7 @@ export const updateTodo = /* GraphQL */ `
     $condition: ModelTodoConditionInput
   ) {
     updateTodo(input: $input, condition: $condition) {
+      item
       id
       name
       zip
@@ -35,6 +37,7 @@ export const deleteTodo = /* GraphQL */ `
     $condition: ModelTodoConditionInput
   ) {
     deleteTodo(input: $input, condition: $condition) {
+      item
       id
       name
       zip

@@ -4,6 +4,7 @@
 export const onCreateTodo = /* GraphQL */ `
   subscription OnCreateTodo {
     onCreateTodo {
+      item
       id
       name
       zip
@@ -15,6 +16,7 @@ export const onCreateTodo = /* GraphQL */ `
 export const onUpdateTodo = /* GraphQL */ `
   subscription OnUpdateTodo {
     onUpdateTodo {
+      item
       id
       name
       zip
@@ -26,6 +28,7 @@ export const onUpdateTodo = /* GraphQL */ `
 export const onDeleteTodo = /* GraphQL */ `
   subscription OnDeleteTodo {
     onDeleteTodo {
+      item
       id
       name
       zip

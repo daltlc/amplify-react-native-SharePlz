@@ -1,8 +1,9 @@
 type Todo @model {
+	item: String!
 	id: ID!
 	name: String!
-  zip: String
-  phoneNumber: String
+	zip: String
+	phoneNumber: String
 	description: String
 }
 

@@ -4,6 +4,7 @@
 export const getTodo = /* GraphQL */ `
   query GetTodo($id: ID!) {
     getTodo(id: $id) {
+      item
       id
       name
       zip
@@ -20,6 +21,7 @@ export const listTodos = /* GraphQL */ `
   ) {
     listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        item
         id
         name
         zip
