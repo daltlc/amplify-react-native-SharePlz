@@ -39,6 +39,10 @@ amplify push
 
 6. Run the project
 
+YOU WILL NEED EXPO CLI DOWNLOADED BEFORE STARTING.
+
+Expo docs for installation: https://docs.expo.io/versions/latest/get-started/installation/
+
 ```sh
 npm start
 ```
