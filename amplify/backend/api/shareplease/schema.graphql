@@ -1,5 +1,5 @@
 type Todo @model {
-	name: String!
+	item: String!
 	id: ID!
 	name: String!
 	zip: String
