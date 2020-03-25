@@ -10,6 +10,7 @@ import {
 	Platform,
 	ImageBackground
 } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { listTodos } from '../src/graphql/queries';
 import { createTodo } from '../src/graphql/mutations';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -78,19 +79,24 @@ export default class App extends React.Component {
 				{this.state.showInputs === false && (
 					<ScrollView style={styles.scrollView}>
 						{this.state.todos.map((todo, index) => (
-							<View key={index} style={styles.todo}>
-								<Text style={styles.nameTitle}>
-									Name: <Text style={styles.name}>{todo.name}</Text>
-								</Text>
-								<Text style={styles.nameTitle}>
-									Items: <Text style={styles.name}>{todo.item}</Text>
-								</Text>
-								<Text style={styles.nameTitle}>
-									ZIP: <Text style={styles.name}>{todo.zip}</Text>
-								</Text>
-								<Text style={styles.nameTitle} onPress={this.dialCall(todo.phoneNumber)}>
-									Phone or WhatsApp: <Text style={styles.name}>{todo.phoneNumber}</Text>
-								</Text>
+							<View style={styles.todo}>
+								<View>
+									<Icon reverse name="ios-person" type="ionicon" color="#527fff" />
+								</View>
+								<View key={index}>
+									<Text style={styles.nameTitleName}>
+										<Text style={styles.titleName}>{todo.name}</Text>
+									</Text>
+									<Text style={styles.nameTitle}>
+										Items: <Text style={styles.name}>{todo.item}</Text>
+									</Text>
+									<Text style={styles.nameTitle}>
+										ZIP: <Text style={styles.name}>{todo.zip}</Text>
+									</Text>
+									<Text style={styles.nameTitle} onPress={this.dialCall(todo.phoneNumber)}>
+										Phone or WhatsApp: <Text style={styles.name}>{todo.phoneNumber}</Text>
+									</Text>
+								</View>
 							</View>
 						))}
 					</ScrollView>
@@ -141,16 +147,16 @@ export default class App extends React.Component {
 					</View>
 				)}
 				{this.state.showInputs === false && (
-					<ImageBackground source={backdrop} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
-						<View style={styles.filterAndAdd}>
-							<TouchableOpacity
-								onPress={() => this.setState({ showInputs: true })}
-								style={styles.addbuttonContainer}
-							>
-								<Text style={styles.buttonText}>Add + </Text>
-							</TouchableOpacity>
-						</View>
-					</ImageBackground>
+					// <ImageBackground source={backdrop} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
+					<View style={styles.filterAndAdd}>
+						<TouchableOpacity
+							onPress={() => this.setState({ showInputs: true })}
+							style={styles.addbuttonContainer}
+						>
+							<Text style={styles.buttonText}>Add + </Text>
+						</TouchableOpacity>
+					</View>
+					// </ImageBackground>
 				)}
 			</View>
 		);
@@ -189,7 +195,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	addbuttonContainer: {
-		backgroundColor: '#FFAC31',
+		backgroundColor: '#527fff',
 		marginTop: 10,
 		padding: 10,
 		borderRadius: 5,
@@ -209,23 +215,50 @@ const styles = StyleSheet.create({
 		borderBottomColor: '#ddd',
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		backgroundColor: '#31465F'
+		backgroundColor: '#E6E6E6',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#e6e6e6',
+		borderBottomWidth: 0,
+		shadowColor: '#bbbbbb',
+		shadowOffset: { width: 6, height: 6 },
+		shadowOpacity: 0.7,
+		shadowRadius: 2,
+		flexDirection: 'row'
+	},
+	titleName: {
+		fontSize: 16,
+		fontWeight: 'bold',
+		paddingHorizontal: 10,
+		// textTransform: 'uppercase',
+		color: 'black',
+		fontFamily: 'Arial',
+		letterSpacing: 1
 	},
 	name: {
 		fontSize: 14,
 		fontWeight: 'normal',
 		paddingHorizontal: 10,
-		textTransform: 'uppercase',
-		color: 'white',
-		fontFamily: 'Chalkboard SE'
+		// textTransform: 'uppercase',
+		color: 'black',
+		fontFamily: 'Arial'
+		// letterSpacing: -0.5
 	},
-
-	nameTitle: {
+	nameTitleName: {
 		fontWeight: 'bold',
 		paddingHorizontal: 10,
-		color: 'white',
+		color: 'black',
 		fontSize: 16,
-		fontFamily: 'Chalkboard SE'
+		fontFamily: 'Arial',
+		letterSpacing: 1
+	},
+	nameTitle: {
+		// fontWeight: 'bold',
+		paddingHorizontal: 10,
+		color: 'black',
+		fontSize: 14,
+		fontFamily: 'Arial',
+		letterSpacing: 1
 	},
 	or: {
 		fontSize: 20,

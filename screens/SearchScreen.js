@@ -92,23 +92,23 @@ export default class App extends React.Component {
 				)}
 
 				{this.state.showInputs === false && (
-					<ImageBackground source={backdrop} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
-						<ScrollView style={styles.scrollView}>
-							{this.state.todos.filter((todo) => todo.zip == this.state.ZIPfilter).map((todo, index) => (
-								<View key={index} style={styles.todo}>
-									<Text style={styles.nameTitle}>
-										Items: <Text style={styles.name}>{todo.name}</Text>
-									</Text>
-									<Text style={styles.nameTitle}>
-										ZIP: <Text style={styles.name}>{todo.zip}</Text>
-									</Text>
-									<Text style={styles.nameTitle}>
-										Phone: <Text style={styles.name}>{todo.phoneNumber}</Text>
-									</Text>
-								</View>
-							))}
-						</ScrollView>
-					</ImageBackground>
+					// <ImageBackground source={backdrop} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
+					<ScrollView style={styles.scrollView}>
+						{this.state.todos.filter((todo) => todo.zip == this.state.ZIPfilter).map((todo, index) => (
+							<View key={index} style={styles.todo}>
+								<Text style={styles.nameTitle}>
+									Items: <Text style={styles.name}>{todo.name}</Text>
+								</Text>
+								<Text style={styles.nameTitle}>
+									ZIP: <Text style={styles.name}>{todo.zip}</Text>
+								</Text>
+								<Text style={styles.nameTitle}>
+									Phone: <Text style={styles.name}>{todo.phoneNumber}</Text>
+								</Text>
+							</View>
+						))}
+					</ScrollView>
+					// </ImageBackground>
 				)}
 			</View>
 		);
